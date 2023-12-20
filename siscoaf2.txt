@@ -1,0 +1,26 @@
+from selenium import webdriver
+import time
+
+url = "https://www.gov.br/coaf/pt-br/acesso-a-informacao/Institucional/a-atividade-de-supervisao/regulacao/supervisao/normas-1"
+
+
+# Iniciar o driver do Chrome
+driver = webdriver.Chrome()
+
+# Navegar até a página
+driver.get(url)
+
+# Aguardar um pouco para garantir que a página carregue completamente
+time.sleep(2)
+
+# Usar execute_script para obter todos os elementos com JS Path
+js_path = '#content-core > article > span'
+elements = driver.execute_script(f'return document.querySelectorAll("{js_path}");')
+
+# Iterar sobre os elementos e imprimir o texto de cada um
+for element in elements:
+    element_text = element.text
+    print(element_text)
+
+# Fechar o navegador
+driver.quit()
